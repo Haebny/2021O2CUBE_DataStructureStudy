@@ -8,11 +8,6 @@ using namespace std;
 
 int main()
 {
-	int x = 1;
-	int y = 0;
-	int *p = &x;
-
-	*p = 0;
 
 	Simulator* simulator = Simulator::GetInstance();
 	simulator->SimulatorLoop();

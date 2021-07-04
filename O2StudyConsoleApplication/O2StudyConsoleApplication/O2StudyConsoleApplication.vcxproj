@@ -108,7 +108,7 @@
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>NotSet</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -154,10 +154,14 @@
     <ClCompile Include="O2StudyConsoleApplication.cpp" />
     <ClCompile Include="RecursiveFuncs.cpp" />
     <ClCompile Include="Simulator.cpp" />
+    <ClCompile Include="StackFuncs.cpp" />
+    <ClCompile Include="TemplateSingleton.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RecursiveFuncs.h" />
     <ClInclude Include="Simulator.h" />
+    <ClInclude Include="StackFuncs.h" />
+    <ClInclude Include="TemplateSingleton.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,5 +1,6 @@
 #pragma once
 #include "RecursiveFuncs.h"
+#include "StackFuncs.h"
 // #include "stddef.h" // nullptr대신 NULL 쓰고싶을 때!
 
 enum Chapter
@@ -26,7 +27,8 @@ private:
 	bool isPlaying = true;
 	bool isChoosen = false;
 	int key;
-	RecursiveFuncs* recursion;
+	RecursiveFuncs* recursionf;
+	StackFuncs* stackf;
 
 	Chapter chapter = NONE;	// 진행 챕터
 
@@ -38,7 +40,10 @@ private:
 	// 러닝타임 중 해제 필요 시 사용
 	static void Destroy();
 
-	void GoMain(int key);
+	// 메인으로 돌아가기
+	void GoMain();
+	// 메세지 출력
+	void SendMessage();
 
 public:
 	static Simulator* GetInstance();

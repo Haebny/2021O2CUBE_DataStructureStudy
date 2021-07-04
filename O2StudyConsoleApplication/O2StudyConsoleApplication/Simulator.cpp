@@ -19,15 +19,17 @@ void Simulator::Destroy()
 	delete instance;
 }
 
-void Simulator::GoMain(int key)
-{	
+void Simulator::GoMain()
+{
 	// 종료
-	if (key == 0)
-	{
-		cout << "해당 챕터를 나갑니다." << endl << endl;
-		isChoosen = false;
-		key = NULL;
-	}
+	cout << "해당 챕터를 나갑니다." << endl << endl;
+	isChoosen = false;
+	key = NULL;
+}
+
+void Simulator::SendMessage()
+{
+	cout << "디버깅 모드에서만 실행 가능합니다." << endl << endl;
 }
 
 Simulator* Simulator::GetInstance()
@@ -47,7 +49,7 @@ void Simulator::SimulatorLoop()
 		{
 			cout << "Chapter 번호 선택(종료는 0번)" << endl
 				<< "1. 재귀" << endl
-				<< "2. 스택" << endl
+				<< "2. 스택(디버깅 전용)" << endl
 				<< "3. 큐" << endl
 				<< "4. 연결리스트" << endl
 				<< "5. 트리" << endl
@@ -73,7 +75,7 @@ void Simulator::SimulatorLoop()
 		if (key == 1 && !isChoosen)
 		{
 			isChoosen = true;
-			recursion = new RecursiveFuncs();
+			recursionf = new RecursiveFuncs();
 			key = NULL;
 
 			while (isChoosen)
@@ -88,7 +90,7 @@ void Simulator::SimulatorLoop()
 					cin >> key;
 				}
 
-				GoMain(key);
+				GoMain();
 
 				// 팩토리얼 계산 함수 실행
 				if (key == 1)
@@ -101,12 +103,11 @@ void Simulator::SimulatorLoop()
 					if (n < 0)
 					{
 						cout << "해당 챕터를 나갑니다." << endl << endl;
-						isChoosen = false;
-						key = NULL;
+						GoMain();
 						continue;
 					}
 
-					cout << n << "! = " << recursion->Factorial(n) << endl;
+					cout << n << "! = " << recursionf->Factorial(n) << endl;
 				}
 
 				// 하노이의 탑 함수 실행
@@ -119,17 +120,68 @@ void Simulator::SimulatorLoop()
 					// 종료
 					if (n < 0)
 					{
-						GoMain(key);
+						GoMain();
 						continue;
 					}
 
 					cout << "원반의 개수: " << n << "개" << endl << endl;
-					recursion->Hanoi(n, 1, 2, 3);
+					recursionf->Hanoi(n, 1, 2, 3);
 				}
 			}
-
-			delete recursion;
+			delete recursionf;
+			continue;
 		}
+
+#ifndef _DEBUG
+		if (key == 2 && !isChoosen)
+		{
+			SendMessage();
+			continue;
+		}
+
+#else
+		// 스택 선택
+		if (key == 2 && !isChoosen)
+		{
+			isChoosen = true;
+			stackf = new StackFuncs();
+			key = NULL;
+
+			while (isChoosen)
+			{
+				// 함수 선택
+				if (key == NULL)
+				{
+					cout << endl
+						<< "Chapter 번호 선택(종료는 0번)" << endl
+						<< "1. 스택 프레임(변수)" << endl
+						<< "2. 스택 프레임(재귀)" << endl;
+					cin >> key;
+				}
+
+				if (key == 0)
+				{
+					key = NULL;
+					isChoosen = false;
+					GoMain();
+					continue;
+				}
+
+				// 변수의 스택프레임 함수 실행
+				if (key == 1)	stackf->StackFrameWorks1();
+
+				// 하노이의 탑 함수 실행
+				if (key == 2)	stackf->StackFrameWorks2();
+
+				cout << "----- DONE -----" << endl << endl;
+				GoMain();
+				continue;
+			}
+			delete stackf;
+			continue;
+		}
+
+#endif
 	}
 }
 
