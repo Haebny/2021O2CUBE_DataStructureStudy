@@ -90,7 +90,7 @@ void Simulator::SimulatorLoop()
 					cin >> key;
 				}
 
-				GoMain();
+				if (key == 0)	GoMain();
 
 				// 팩토리얼 계산 함수 실행
 				if (key == 1)

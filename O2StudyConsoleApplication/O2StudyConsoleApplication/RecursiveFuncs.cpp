@@ -38,10 +38,10 @@ void RecursiveFuncs::Hanoi(int num, int src, int tmp, int dest)
 		return;
 	}
 
-	if (num > 1)
+	else
 	{
 		Hanoi(num - 1, src, dest, tmp);
-		printf("%d번 원반을 %d번 기둥에서 %d번 기둥으로 옮깁니다.\n", num, dest, src);
+		printf("%d번 원반을 %d번 기둥에서 %d번 기둥으로 옮깁니다.\n", num, src, dest);
 		Hanoi(num - 1, tmp, src, dest);
 	}
 }
